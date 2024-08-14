@@ -1,5 +1,14 @@
 var map = L.map('map', {zoomControl:true}).setView([47.4816286643502, 19.054848468750514], 16);
 
+map.setMaxBounds([
+	//south west
+	[47.475186528326155, 19.043383598327637],
+	//north east
+	[47.48806400761193, 19.06630039215088]
+	], );
+
+map.options.minZoom = 15;
+
 var mapLink = 
 	'<a href="http://www.esri.com/">Esri</a>';
 var wholink = 
@@ -55,6 +64,10 @@ var baseMaps = {
 
 var layerControl = L.control.layers(baseMaps).addTo(map);
 
-
+const resizeObserver = new ResizeObserver(() => {
+	map.invalidateSize();
+  });
+  
+  resizeObserver.observe(document.getElementById("map"));
 export { map }; 
 export { alapTerkep, foldszint, elsoEmelet };

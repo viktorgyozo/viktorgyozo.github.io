@@ -6,7 +6,7 @@
 body {
   /*padding-top: 50px;*/
   padding-top: 0px;
-  overflow: hidden;
+  overflow-y:scroll
 }
 
 
@@ -53,8 +53,20 @@ body {
   }
 }
 
+@media (orientation : landscape){
+  .sidebar{
+    width: "25%"
+  }
+}
+
+@media (orientation : portrait){
+  .sidebar{
+    width: "40%"
+  }
+}
+
 .item-sidebar {
-  /*margin-top: 20px;*/
+  
   margin-bottom: 20px;
 }
 
@@ -136,4 +148,19 @@ body {
 .placeholder img {
   display: inline-block;
   border-radius: 50%;
+}
+
+.closebtn {
+  position: absolute;
+  top: -20px;
+  right: 0px;
+  font-size: 36px; /* Increase the font size for a larger X */
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+  margin: 20px;
+}
+
+.closebtn:hover {
+  color: #3c763d; /* Optional: Change color on hover */
 }

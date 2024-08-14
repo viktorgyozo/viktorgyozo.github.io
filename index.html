@@ -10,6 +10,7 @@
     <link rel="icon" href="../../favicon.ico">
 
     <title>BME ÉMK Campus Térkép</title>
+    
 
     <!-- Bootstrap core CSS -->
     <link href="style/bootstrap.min.css" rel="stylesheet">
@@ -65,21 +66,46 @@
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-4 col-md-3 sidebar">
+        <div class="col-sm-4 col-md-3 sidebar" id="navwrapper">
           <!-- <h2 class="sub-header">Map title</h2> -->
-
-          <div class="panel panel-default item-sidebar">
-            <div class="panel-body">
-				<p><b>BME ÉMK Campus Térkép</b></p>
+          <div>
+          
+          </div>
+          <div class="panel panel-default item-sidebar" style="border: none;">
+            <div class="panel-body" style="margin-top: -25px">
+            <img src="js/img/csb.png" id="logo" data-holder-rendered="true" style="width: 90%" display:"block">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             </div>
           </div>
+
+        <div class="checkbox-wrapper-2">
+            <label for="custom-checkbox" class="checkbox-label">Mellékhelyiségek</label>
+            <input type="checkbox" id="custom-checkbox" class="ikxBAC"/>
+        </div>
+
+        <div class="checkbox-wrapper-2">
+          <label for="custom-checkbox" class="checkbox-label">Étel / Ital</label>
+          <input type="checkbox" id="custom-checkbox" class="ikxBAC"/>
+        </div>
+
+        <div class="checkbox-wrapper-2">
+          <label for="custom-checkbox" class="checkbox-label">Termek</label>
+          <input type="checkbox" id="custom-checkbox" class="ikxBAC"/>
+        </div>
+
+        <div class="checkbox-wrapper-2">
+          <label for="custom-checkbox" class="checkbox-label">Tömegközlekedés</label>
+          <input type="checkbox" id="custom-checkbox" class="ikxBAC"/>
+        </div>
 
           <div class="input-group item-sidebar">
             <input type="text" id= "search-bar" class="form-control" placeholder="Search for...">
             <span class="input-group-btn">
               <button class="btn btn-default" id="search-button" type="button">Keres</button>
             </span>
-          </div><!-- /input-group -->          
+          </div><!-- /input-group -->    
+          
+          
 
           <div class="list-group item-sidebar" id="searchresult">
             <a href="#" class="list-group-item active">
@@ -88,7 +114,7 @@
           </div>
 
           <div class="thumbnail">
-            <img src="js/img/K142.jpg" id="preview" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+            <img src="js/img/K142.jpg" id="preview" data-holder-rendered="true" style="height: 200px; width: 300px; display: block;">
             <div class="caption" id="previewdesc">
               <h4>Előnézet</h4>
               <p><b>Itt</b> fog megjelenni a terem előnézete</p>
@@ -98,7 +124,9 @@
 
           <div class="panel panel-default item-sidebar">
             <div class="panel-body">
-				<a href="https://epito.bme.hu/">BME Építőmérnöki Kar</a>
+				<a href="https://epito.bme.hu/"><center>BME Építőmérnöki Kar</center></a>
+        <p><a href="#" onclick="showAlert()"><center>Névjegy</center></a></p>
+        <b><center>Powered by Dorvig™</center></b>
             </div>
           </div>
 <!--           <ul class="nav nav-sidebar">
@@ -108,9 +136,9 @@
           </ul> -->
 
         </div>
-        <div class="col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3 main">
+        <div class="col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3 main" id="terkepwrapper">
           <div id="map"></div>
-
+          <button id="refreshButton" onclick="openNav()" style="display:none;">Oldalsáv</button>
         </div>
       </div>
     </div>
@@ -134,6 +162,38 @@
             maxZoom: 16,
             }).addTo(SearchableMapLib.map);
 	></script>
+  <script>
+function openNav() {
+  if (window.matchMedia("(orientation: portrait)").matches){
+	document.getElementById("navwrapper").style.width = "40%";
+	document.getElementById("terkepwrapper").style.marginLeft = "40%";
+  document.getElementById("navwrapper").style.padding = "20px";
+  document.getElementById("navwrapper").style.position = "absolute";
+  document.getElementById("terkepwrapper").style.width = "60%";
+  }else{
+  document.getElementById("navwrapper").style.width = "25%";
+	document.getElementById("terkepwrapper").style.marginLeft = "25%";
+  document.getElementById("navwrapper").style.padding = "20px";
+  document.getElementById("navwrapper").style.position = "absolute";
+  document.getElementById('refreshButton').style.display = "none";
+  document.getElementById("terkepwrapper").style.width = "75%";
+  }
+  }
+  
+  /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+function closeNav() {
+	document.getElementById("navwrapper").style.width = "0";
+	document.getElementById("terkepwrapper").style.marginLeft = "0";
+  document.getElementById("terkepwrapper").style.width = "100%";
+  document.getElementById("navwrapper").style.padding = "0";
+  document.getElementById("navwrapper").style.position = "absolute";
+  document.getElementById('refreshButton').style.display = "block";
+  } 
+  function showAlert() {
+          alert("A térképet készítette: \nBME Fotogrammetria és Térinformatika Tanszék \nKapcsolat: \nhorvath.viktor.gyozo@emk.bme.hu");
+  }
+  
+    </script>
 	<script type="module" src="js/search-map.js"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
     <!--<script src="js/holder.js"></script>-->
