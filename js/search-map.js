@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const allGeoJSONs = [fsz, mfsz, I, II,III]; 
         const allFeatures = allGeoJSONs.flatMap(geojson => geojson.features);
 
-        const filteredData = geoJsonData.features.filter(feature => {
+        const filteredData = allFeatures.features.filter(feature => {
             return feature.properties.nev.toLowerCase().includes(searchString);
         });
         displayResults(filteredData);
