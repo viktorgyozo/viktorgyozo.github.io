@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let II;
     async function loadII() {
         try {
-            const response = await fetch('./I.geojson'); // Adjust the path as needed
+            const response = await fetch('./II.geojson'); // Adjust the path as needed
             if (!response.ok) {
                 throw new Error(`Failed to fetch GeoJSON: ${response.status} ${response.statusText}`);
             }
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let III;
     async function loadIII() {
         try {
-            const response = await fetch('./I.geojson'); // Adjust the path as needed
+            const response = await fetch('./III.geojson'); // Adjust the path as needed
             if (!response.ok) {
                 throw new Error(`Failed to fetch GeoJSON: ${response.status} ${response.statusText}`);
             }
