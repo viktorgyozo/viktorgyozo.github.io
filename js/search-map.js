@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    loadIII();
+    loadII();
 
     let III;
     async function loadIII() {
