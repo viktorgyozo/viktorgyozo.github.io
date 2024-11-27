@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let fsz; // Declare a global variable to store the GeoJSON
 
     // Function to load the GeoJSON
-    async function loadGeoJSON() {
+    async function loadfsz() {
         try {
             const response = await fetch('./fsz.geojson'); // Adjust the path as needed
             if (!response.ok) {
@@ -24,10 +24,80 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    loadGeoJSON();
+    loadfsz();
+
+    let mfsz;
+
+    async function loadmfsz() {
+        try {
+            const response = await fetch('./mfsz.geojson'); // Adjust the path as needed
+            if (!response.ok) {
+                throw new Error(`Failed to fetch GeoJSON: ${response.status} ${response.statusText}`);
+            }
+            mfsz = await response.json(); // Parse and store the GeoJSON data
+            console.log('GeoJSON loaded:', mfsz); // Verify in console
+        } catch (error) {
+            console.error('Error loading GeoJSON:', error);
+        }
+    }
+
+    loadmfsz();
+
+    let I;
+    async function loadI() {
+        try {
+            const response = await fetch('./I.geojson'); // Adjust the path as needed
+            if (!response.ok) {
+                throw new Error(`Failed to fetch GeoJSON: ${response.status} ${response.statusText}`);
+            }
+            I = await response.json(); // Parse and store the GeoJSON data
+            console.log('GeoJSON loaded:', I); // Verify in console
+        } catch (error) {
+            console.error('Error loading GeoJSON:', error);
+        }
+    }
+
+    loadI();
+
+    let II;
+    async function loadII() {
+        try {
+            const response = await fetch('./I.geojson'); // Adjust the path as needed
+            if (!response.ok) {
+                throw new Error(`Failed to fetch GeoJSON: ${response.status} ${response.statusText}`);
+            }
+            II = await response.json(); // Parse and store the GeoJSON data
+            console.log('GeoJSON loaded:', II); // Verify in console
+        } catch (error) {
+            console.error('Error loading GeoJSON:', error);
+        }
+    }
+
+    loadIII();
+
+    let III;
+    async function loadIII() {
+        try {
+            const response = await fetch('./I.geojson'); // Adjust the path as needed
+            if (!response.ok) {
+                throw new Error(`Failed to fetch GeoJSON: ${response.status} ${response.statusText}`);
+            }
+            II = await response.json(); // Parse and store the GeoJSON data
+            console.log('GeoJSON loaded:', III); // Verify in console
+        } catch (error) {
+            console.error('Error loading GeoJSON:', error);
+        }
+    }
+
+    loadIII();
+
 
     function search() {
         const searchString = searchBar.value.toLowerCase();
+
+        const allGeoJSONs = [fsz, mfsz, I, II,III]; 
+        const allFeatures = allGeoJSONs.flatMap(geojson => geojson.features);
+
         const filteredData = geoJsonData.features.filter(feature => {
             return feature.properties.nev.toLowerCase().includes(searchString);
         });
