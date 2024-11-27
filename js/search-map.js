@@ -8,15 +8,23 @@ document.addEventListener('DOMContentLoaded', () => {
 	const resultsContainer = document.querySelector('.list-group.item-sidebar');
     const markersLayer = L.layerGroup().addTo(map);
 	
-    let fsz; 
+    let fsz; // Declare a global variable to store the GeoJSON
 
-    fetch('./fsz.geojson')
-    .then(geojsonData => {
-        fsz = geojsonData;
-      console.log(fsz);
-      // Use the geojsonData here
-    })
+    // Function to load the GeoJSON
+    async function loadGeoJSON() {
+        try {
+            const response = await fetch('./fsz.geojson'); // Adjust the path as needed
+            if (!response.ok) {
+                throw new Error(`Failed to fetch GeoJSON: ${response.status} ${response.statusText}`);
+            }
+            fsz = await response.json(); // Parse and store the GeoJSON data
+            console.log('GeoJSON loaded:', fsz); // Verify in console
+        } catch (error) {
+            console.error('Error loading GeoJSON:', error);
+        }
+    }
 
+    loadGeoJSON();
 
     function search() {
         const searchString = searchBar.value.toLowerCase();
