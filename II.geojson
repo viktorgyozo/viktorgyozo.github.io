@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "II",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 1, "CLASS_NUM": "K234", "NAME": null, "A1": 364.0, "REACH": "közvetlen", "OWNER": "Kancellária - Kari prioritású terem", "SEAT_NUM": 540, "LOCKABLE": "T", "KEY_LOC": "Főporta", "BOARD": "T", "BOARD_TYPE": "kréta", "B_STATE": "jó", "PROJ_SURF": "T", "P_S_TYPE": "vászon", "P_S_STATE": "jó", "SPEAKER": "T", "S_STATE": "jó", "PROJ": "T", "PROJ_CONN": "DSUB, HDMI", "DARKENING": "T", "COMMENT": "A termet a takarítók nyitják. A projektor távirányító és a kihangosítás kari kulcsos." }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 10.788789053923203, 45.03631497624837 ], [ 10.789017129621682, 45.036332110357932 ], [ 10.789043927572086, 45.036152775931505 ], [ 10.788815852600457, 45.036135641876591 ], [ 10.788789053923203, 45.03631497624837 ] ] ] ] } }
+]
+}
