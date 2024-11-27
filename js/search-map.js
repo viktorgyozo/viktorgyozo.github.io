@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) {
                 throw new Error(`Failed to fetch GeoJSON: ${response.status} ${response.statusText}`);
             }
-            II = await response.json(); // Parse and store the GeoJSON data
+            III = await response.json(); // Parse and store the GeoJSON data
             console.log('GeoJSON loaded:', III); // Verify in console
         } catch (error) {
             console.error('Error loading GeoJSON:', error);
