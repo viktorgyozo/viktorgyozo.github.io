@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const resultsContainer = document.querySelector('.list-group.item-sidebar');
     const markersLayer = L.layerGroup().addTo(map);
 	
-    fetch('fsz.geojson')
+    fetch('./fsz.geojson')
     .then(geojsonData => {
         fsz = geojsonData;
       console.log(fsz);
