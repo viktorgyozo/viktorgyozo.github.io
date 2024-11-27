@@ -8,21 +8,18 @@ document.addEventListener('DOMContentLoaded', () => {
 	const resultsContainer = document.querySelector('.list-group.item-sidebar');
     const markersLayer = L.layerGroup().addTo(map);
 	
-    const geoJsonData = {
-		"type": "FeatureCollection",
-		"name": "elsoemelet",
-		"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-		"features": [
-		{ "type": "Feature", "properties": { "id": 1, "nev": "Fotogrammetria és Térinformatika Tanszék", "ferohely": "Nincs", "azonosito": "BMEFMT" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 19.054630763796894, 47.481908299222198 ], [ 19.054673255493391, 47.481931343614818 ], [ 19.054700534113362, 47.481946588361303 ], [ 19.054993254689201, 47.481695935805149 ], [ 19.054921910606204, 47.481657646483349 ], [ 19.054630763796894, 47.481908299222198 ] ] ] ] } },
-		{ "type": "Feature", "properties": { "id": 2, "nev": "K142", "ferohely": "2x18", "azonosito": "K142", "centroid": [19.05500095,47.48137878]}, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 19.054864905284976, 47.481341640336069 ], [ 19.054919462524921, 47.481293187467791 ], [ 19.055128248885463, 47.481406874371089 ], [ 19.055072992193733, 47.481453672650652 ], [ 19.054864905284976, 47.481341640336069 ] ] ] ] } },
-		{ "type": "Feature", "properties": { "id": 1, "nev": "K143", "ferohely": "15", "azonosito": "KF3valami" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 19.054663950253886, 47.481879814067042 ], [ 19.054689625463414, 47.481893500729029 ], [ 19.054712417360644, 47.481873782655526 ], [ 19.054718115334957, 47.481876241615694 ], [ 19.054725186315125, 47.481870395785698 ], [ 19.054694499634213, 47.481853786201675 ], [ 19.054663950253886, 47.481879814067042 ] ] ] ] } },
-		{ "type": "Feature", "properties": { "id": 2, "nev": "K142", "ferohely": "2x18", "azonosito": "K142", "centroid": [19.05500095,47.48137878]}, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 19.054864905284976, 47.481341640336069 ], [ 19.054919462524921, 47.481293187467791 ], [ 19.055128248885463, 47.481406874371089 ], [ 19.055072992193733, 47.481453672650652 ], [ 19.054864905284976, 47.481341640336069 ] ] ] ] } },
-		{ "type": "Feature", "properties": { "id": 2, "nev": "K142", "ferohely": "2x18", "azonosito": "K142", "centroid": [19.05500095,47.48137878]}, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 19.054864905284976, 47.481341640336069 ], [ 19.054919462524921, 47.481293187467791 ], [ 19.055128248885463, 47.481406874371089 ], [ 19.055072992193733, 47.481453672650652 ], [ 19.054864905284976, 47.481341640336069 ] ] ] ] } },
-		{ "type": "Feature", "properties": { "id": 2, "nev": "K142", "ferohely": "2x18", "azonosito": "K142", "centroid": [19.05500095,47.48137878]}, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 19.054864905284976, 47.481341640336069 ], [ 19.054919462524921, 47.481293187467791 ], [ 19.055128248885463, 47.481406874371089 ], [ 19.055072992193733, 47.481453672650652 ], [ 19.054864905284976, 47.481341640336069 ] ] ] ] } },
-		{ "type": "Feature", "properties": { "id": 2, "nev": "K142", "ferohely": "2x18", "azonosito": "K142", "centroid": [19.05500095,47.48137878]}, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 19.054864905284976, 47.481341640336069 ], [ 19.054919462524921, 47.481293187467791 ], [ 19.055128248885463, 47.481406874371089 ], [ 19.055072992193733, 47.481453672650652 ], [ 19.054864905284976, 47.481341640336069 ] ] ] ] } },
-		{ "type": "Feature", "properties": { "id": 2, "nev": "K142", "ferohely": "2x18", "azonosito": "K142", "centroid": [19.05500095,47.48137878]}, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 19.054864905284976, 47.481341640336069 ], [ 19.054919462524921, 47.481293187467791 ], [ 19.055128248885463, 47.481406874371089 ], [ 19.055072992193733, 47.481453672650652 ], [ 19.054864905284976, 47.481341640336069 ] ] ] ] } }
-		]
-		};
+    fetch('fsz.geojson')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return fsz.json();
+    })
+    .then(geojsonData => {
+        fsz = geojsonData;
+      console.log(fsz);
+      // Use the geojsonData here
+    })
 
 
     function search() {
