@@ -1,0 +1,104 @@
+<PAMDataset>
+  <Metadata>
+    <MDI key="Raw_profile_type_exif">
+exif
+     214
+45786966000049492a00080000000a000001040001000000a90a00000101040001000000
+de0600000201030003000000860000001201030001000000010000001a01050001000000
+8c0000001b0105000100000094000000280103000100000003000000310102000d000000
+9c0000003201020014000000aa0000006987040001000000be0000000000000008000800
+0800610f000032000000610f00003200000047494d5020322e31302e3338000032303234
+3a31313a32382030303a33323a323500010001a00300010000000100000000000000
+</MDI>
+    <MDI key="XML_com.adobe.xmp">&lt;?xpacket begin="&#xFEFF;" id="W5M0MpCehiHzreSzNTczkc9d"?&gt;
+&lt;x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="XMP Core 4.4.0-Exiv2"&gt;
+ &lt;rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"&gt;
+  &lt;rdf:Description rdf:about=""
+    xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+    xmlns:stEvt="http://ns.adobe.com/xap/1.0/sType/ResourceEvent#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:GIMP="http://www.gimp.org/xmp/"
+    xmlns:tiff="http://ns.adobe.com/tiff/1.0/"
+    xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+   xmpMM:DocumentID="gimp:docid:gimp:99092674-cb74-4d90-ba06-7adc8bd418d8"
+   xmpMM:InstanceID="xmp.iid:e3045c74-b8b5-4e30-a684-893d71ea157d"
+   xmpMM:OriginalDocumentID="xmp.did:c5268bf0-cd85-4e48-9166-697c8bb91de6"
+   dc:Format="image/png"
+   GIMP:API="2.0"
+   GIMP:Platform="Windows"
+   GIMP:TimeStamp="1732750347250594"
+   GIMP:Version="2.10.38"
+   tiff:Orientation="1"
+   xmp:CreatorTool="GIMP 2.10"
+   xmp:MetadataDate="2024:11:28T00:32:25+01:00"
+   xmp:ModifyDate="2024:11:28T00:32:25+01:00"&gt;
+   &lt;xmpMM:History&gt;
+    &lt;rdf:Seq&gt;
+     &lt;rdf:li
+      stEvt:action="saved"
+      stEvt:changed="/"
+      stEvt:instanceID="xmp.iid:4c31823f-8c6b-443d-86c0-830a2166778a"
+      stEvt:softwareAgent="Gimp 2.10 (Windows)"
+      stEvt:when="2024-11-28T00:32:27"/&gt;
+    &lt;/rdf:Seq&gt;
+   &lt;/xmpMM:History&gt;
+  &lt;/rdf:Description&gt;
+ &lt;/rdf:RDF&gt;
+&lt;/x:xmpmeta&gt;
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+&lt;?xpacket end="w"?&gt;</MDI>
+  </Metadata>
+  <Metadata domain="IMAGE_STRUCTURE">
+    <MDI key="INTERLEAVE">PIXEL</MDI>
+  </Metadata>
+  <PAMRasterBand band="1">
+    <Metadata>
+      <MDI key="STATISTICS_APPROXIMATE">YES</MDI>
+      <MDI key="STATISTICS_MAXIMUM">255</MDI>
+      <MDI key="STATISTICS_MEAN">227.71006687041</MDI>
+      <MDI key="STATISTICS_MINIMUM">0</MDI>
+      <MDI key="STATISTICS_STDDEV">48.838522115441</MDI>
+      <MDI key="STATISTICS_VALID_PERCENT">28.16</MDI>
+    </Metadata>
+  </PAMRasterBand>
+  <PAMRasterBand band="2">
+    <Metadata>
+      <MDI key="STATISTICS_APPROXIMATE">YES</MDI>
+      <MDI key="STATISTICS_MAXIMUM">255</MDI>
+      <MDI key="STATISTICS_MEAN">225.30899573361</MDI>
+      <MDI key="STATISTICS_MINIMUM">0</MDI>
+      <MDI key="STATISTICS_STDDEV">47.030784147146</MDI>
+      <MDI key="STATISTICS_VALID_PERCENT">28.16</MDI>
+    </Metadata>
+  </PAMRasterBand>
+  <PAMRasterBand band="3">
+    <Metadata>
+      <MDI key="STATISTICS_APPROXIMATE">YES</MDI>
+      <MDI key="STATISTICS_MAXIMUM">255</MDI>
+      <MDI key="STATISTICS_MEAN">220.41075372931</MDI>
+      <MDI key="STATISTICS_MINIMUM">0</MDI>
+      <MDI key="STATISTICS_STDDEV">56.228685505014</MDI>
+      <MDI key="STATISTICS_VALID_PERCENT">28.16</MDI>
+    </Metadata>
+  </PAMRasterBand>
+</PAMDataset>

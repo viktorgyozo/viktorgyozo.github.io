@@ -1,105 +1,23 @@
 import { map } from './map_sidebar.js';
 import './leaflet.js';
-import { alapTerkep, foldszint, elsoEmelet } from './map_sidebar.js';
+import { alapTerkep, foldszint, elsoEmelet, masodikEmelet, harmadikEmelet, magasFoldszint, fsz, mfsz, I, II,III, polyLayer} from './map_sidebar.js';
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const searchBar = document.getElementById('search-bar');
     const searchButton = document.getElementById('search-button');
 	const resultsContainer = document.querySelector('.list-group.item-sidebar');
-    const markersLayer = L.layerGroup().addTo(map);
-	
-    let fsz; // Declare a global variable to store the GeoJSON
-
-    // Function to load the GeoJSON
-    async function loadfsz() {
-        try {
-            const response = await fetch('./fsz.geojson'); // Adjust the path as needed
-            if (!response.ok) {
-                throw new Error(`Failed to fetch GeoJSON: ${response.status} ${response.statusText}`);
-            }
-            fsz = await response.json(); // Parse and store the GeoJSON data
-            console.log('GeoJSON loaded:', fsz); // Verify in console
-        } catch (error) {
-            console.error('Error loading GeoJSON:', error);
-        }
-    }
-
-    loadfsz();
-
-    let mfsz;
-
-    async function loadmfsz() {
-        try {
-            const response = await fetch('./mfsz.geojson'); // Adjust the path as needed
-            if (!response.ok) {
-                throw new Error(`Failed to fetch GeoJSON: ${response.status} ${response.statusText}`);
-            }
-            mfsz = await response.json(); // Parse and store the GeoJSON data
-            console.log('GeoJSON loaded:', mfsz); // Verify in console
-        } catch (error) {
-            console.error('Error loading GeoJSON:', error);
-        }
-    }
-
-    loadmfsz();
-
-    let I;
-    async function loadI() {
-        try {
-            const response = await fetch('./I.geojson'); // Adjust the path as needed
-            if (!response.ok) {
-                throw new Error(`Failed to fetch GeoJSON: ${response.status} ${response.statusText}`);
-            }
-            I = await response.json(); // Parse and store the GeoJSON data
-            console.log('GeoJSON loaded:', I); // Verify in console
-        } catch (error) {
-            console.error('Error loading GeoJSON:', error);
-        }
-    }
-
-    loadI();
-
-    let II;
-    async function loadII() {
-        try {
-            const response = await fetch('./II.geojson'); // Adjust the path as needed
-            if (!response.ok) {
-                throw new Error(`Failed to fetch GeoJSON: ${response.status} ${response.statusText}`);
-            }
-            II = await response.json(); // Parse and store the GeoJSON data
-            console.log('GeoJSON loaded:', II); // Verify in console
-        } catch (error) {
-            console.error('Error loading GeoJSON:', error);
-        }
-    }
-
-    loadII();
-
-    let III;
-    async function loadIII() {
-        try {
-            const response = await fetch('./III.geojson'); // Adjust the path as needed
-            if (!response.ok) {
-                throw new Error(`Failed to fetch GeoJSON: ${response.status} ${response.statusText}`);
-            }
-            III = await response.json(); // Parse and store the GeoJSON data
-            console.log('GeoJSON loaded:', III); // Verify in console
-        } catch (error) {
-            console.error('Error loading GeoJSON:', error);
-        }
-    }
-
-    loadIII();
-
+    const markersLayer = L.layerGroup()
+    polyLayer.addTo(map);
 
     function search() {
         const searchString = searchBar.value.toLowerCase();
-
         const allGeoJSONs = [fsz, mfsz, I, II,III]; 
         const allFeatures = allGeoJSONs.flatMap(geojson => geojson.features);
 
-        const filteredData = allFeatures.features.filter(feature => {
-            return feature.properties.nev.toLowerCase().includes(searchString);
+        const filteredData = allFeatures.filter(feature => {
+            //console.log(feature.properties)
+            return feature.properties.CLASS_NUM.toLowerCase().includes(searchString);
         });
         displayResults(filteredData);
     }
@@ -124,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             a.href = '#';
             a.classList.add('list-group-item');
             a.innerHTML = `
-                <h5><b>${result.properties.nev}</b></h5>
+                <h5><b>${result.properties.CLASS_NUM}</b></h5>
             `;
 			}
             a.addEventListener('click', () => {
@@ -134,22 +52,89 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (a.id=='resultItem'){
                     return;
                 }
+                map.removeLayer(polyLayer);
+                map.eachLayer(function(layer) {
+                    map.removeLayer(layer);
+                  });
                 markersLayer.clearLayers();
 				a.classList.add("active");
-				const [lon, lat] = result.properties.centroid;
+				const [lon, lat] = calculatePolygonCentroid(result.geometry.coordinates);
+                //console.log(result.properties.OWNER)
                 map.setView([lat, lon], 20);
 				const marker = L.marker([lat, lon]);
                 markersLayer.addLayer(marker);
-				elsoEmelet.addTo(map);
+
+                const secondChar = result.properties.CLASS_NUM.charAt(1).toUpperCase();  // SZINTVALASZTO MAJD
+                switch (secondChar) {
+                    case 'F':
+                        foldszint.addTo(map);
+                        break;
+                    case '1':
+                        elsoEmelet.addTo(map);
+                        break;
+                    case '2':
+                        masodikEmelet.addTo(map);
+                        break;
+                    case 'M':
+                        magasFoldszint.addTo(map);
+                        break;
+                    case '3':
+                        harmadikEmelet.addTo(map);
+                        break;
+                }
+                polyLayer.clearLayers();
+                markersLayer.addTo(map);
+
+                const polyg = new L.polygon(flipCoordinates(result.geometry.coordinates)[0][0],{zindex: 1000})
+                polyLayer.addLayer(polyg);
+                polyLayer.eachLayer(function(layer) {
+                    layer.options.pane = 'shadowPane';  // Specify the custom pane for each layer
+                  });
+
+                polyLayer.addTo(map);
                 preview.outerHTML = `
 				<img src="teremkepek/` + result.properties.azonosito +`.jpg" data-holder-rendered="true" id="preview" style="height: 200px; width: 100%; display: block;">
 				`;
 				previewdesc.outerHTML = 
                 '<div class="caption" id="previewdesc">' +
-				'<h4>'+result.properties.nev+'</h4> \n <p>Férőhely:'+result.properties.ferohely+'</p>'+
+				'<h4>'+result.properties.CLASS_NUM+'</h4> \n <p>Férőhely:'+result.properties.SEATS_NUM+'</p>'+
+                '\n <p>Tulajdonos: '+result.properties.OWNER+'</p>'+
+                '\n <p>Megközelíthetőség: '+result.properties.REACH+'</p>'+
+                '\n <p>Kulcs helye: '+result.properties.KEY_LOC+'</p>'+
                 '</div>';
             });
             resultsContainer.appendChild(a);
         });
     }
+    function calculatePolygonCentroid(coordinates) {
+        // Flatten the nested coordinates (since this is a polygon, coordinates will be in a multi-level array)
+        const flatCoordinates = coordinates[0][0]; // We access the first polygon and first ring (coordinates)
+    
+        // Initialize sums for x (longitude) and y (latitude)
+        let sumX = 0;
+        let sumY = 0;
+    
+        // Loop through the coordinates and sum the x and y values
+        flatCoordinates.forEach(coord => {
+            sumX += coord[0]; // longitude (x)
+            sumY += coord[1]; // latitude (y)
+        });
+    
+        // Calculate the average (centroid) by dividing by the number of coordinates
+        const centroidX = sumX / flatCoordinates.length;
+        const centroidY = sumY / flatCoordinates.length;
+    
+        return [centroidX, centroidY]; // Return as [longitude, latitude]
+    }
+
+function flipCoordinates(coords) {
+    return coords.map(polygon => {
+        return polygon.map(ring => {
+            return ring.map(coord => {
+                return [coord[1], coord[0]]; // Flip [latitude, longitude] -> [longitude, latitude]
+            });
+        });
+    });
+}
+
 });
