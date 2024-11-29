@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const resultsContainer = document.querySelector('.list-group.item-sidebar');
     const markersLayer = L.layerGroup()
     polyLayer.addTo(map);
+    const geoJsonLayer = L.layerGroup();
 
     function search() {
         const searchString = searchBar.value.toLowerCase();
@@ -29,6 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
             search();
         }
     });
+
+
 
  function displayResults(results) {
         resultsContainer.innerHTML = `
@@ -97,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				`;
 				previewdesc.outerHTML = 
                 '<div class="caption" id="previewdesc">' +
-				'<h4>'+result.properties.CLASS_NUM+'</h4> \n <p>Férőhely:'+result.properties.SEATS_NUM+'</p>'+
+				'<h4>'+result.properties.CLASS_NUM+'</h4> \n <p>Férőhely:'+result.properties.SEAT_NUM+'</p>'+
                 '\n <p>Tulajdonos: '+result.properties.OWNER+'</p>'+
                 '\n <p>Megközelíthetőség: '+result.properties.REACH+'</p>'+
                 '\n <p>Kulcs helye: '+result.properties.KEY_LOC+'</p>'+
@@ -106,6 +109,38 @@ document.addEventListener('DOMContentLoaded', () => {
             resultsContainer.appendChild(a);
         });
     }
+    document.getElementById('custom-checkbox-termek').addEventListener('change', function () {
+        if (this.checked) {
+          if (map.hasLayer(elsoEmelet)) {
+            geoJsonLayer.addLayer(L.geoJSON(I, {
+                style: {
+                    color: "#ff7800",     
+                    weight: 5,            
+                    opacity: 0.65,         
+                    fillOpacity: 0.35,
+                    pane: 'shadowPane'
+                },    
+                onEachFeature: function (feature, layer) {
+                    // Check if the feature has the CLASS_NUM property and create the tooltip content
+                    if (feature.properties && feature.properties.CLASS_NUM) {
+                        let tooltipContent = `${feature.properties.CLASS_NUM}`;
+                            
+                        // Bind the tooltip with the CLASS_NUM property value as the label
+                        layer.bindTooltip(tooltipContent, { permanent: true, direction: 'center', className: 'my-tooltip-class'});
+                    }
+                }
+            }
+        )
+    );
+            geoJsonLayer.addTo(map);
+          } //else if(){}
+        } else {
+            geoJsonLayer.clearLayers();
+            map.removeLayer(geoJsonLayer);
+            map.removeLayer(polyLayer);
+            map.removeLayer(markersLayer);
+        }
+      });
     function calculatePolygonCentroid(coordinates) {
         // Flatten the nested coordinates (since this is a polygon, coordinates will be in a multi-level array)
         const flatCoordinates = coordinates[0][0]; // We access the first polygon and first ring (coordinates)
@@ -127,6 +162,17 @@ document.addEventListener('DOMContentLoaded', () => {
         return [centroidX, centroidY]; // Return as [longitude, latitude]
     }
 
+    map.on('baselayerchange', () => {
+        // Uncheck the checkbox
+        document.getElementById('custom-checkbox-termek').checked = false;
+      
+        // Remove any active GeoJSON layers
+        geoJsonLayer.clearLayers();
+        map.removeLayer(geoJsonLayer);
+        map.removeLayer(polyLayer);
+        map.removeLayer(markersLayer)
+      });
+
 function flipCoordinates(coords) {
     return coords.map(polygon => {
         return polygon.map(ring => {
@@ -135,6 +181,7 @@ function flipCoordinates(coords) {
             });
         });
     });
+    
 }
 
 });
