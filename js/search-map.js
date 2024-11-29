@@ -7,9 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchBar = document.getElementById('search-bar');
     const searchButton = document.getElementById('search-button');
 	const resultsContainer = document.querySelector('.list-group.item-sidebar');
-    const markersLayer = L.layerGroup()
+    const markersLayer = L.layerGroup().addTo(map);
     polyLayer.addTo(map);
-    const geoJsonLayer = L.layerGroup();
+    const geoJsonLayer = L.layerGroup().addTo(map);
 
     function search() {
         const searchString = searchBar.value.toLowerCase();
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
         // Remove any active GeoJSON layers
         geoJsonLayer.clearLayers();
-        markersLayer.clearLayers();
+        //markersLayer.clearLayers();
         map.removeLayer(geoJsonLayer);
         map.removeLayer(polyLayer);
         map.removeLayer(markersLayer)
