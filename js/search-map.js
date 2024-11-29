@@ -168,6 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
         // Remove any active GeoJSON layers
         geoJsonLayer.clearLayers();
+        markersLayer.clearLayers();
         map.removeLayer(geoJsonLayer);
         map.removeLayer(polyLayer);
         map.removeLayer(markersLayer)
